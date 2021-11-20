@@ -1,7 +1,7 @@
 <template>
   <div class="about">
-    <h1>Covid 19 Statistics</h1>
-    <tableData :data="countriesInfo"></tableData>
+    <h2 class="mt-4">Covid 19 Statistics</h2>
+    <tableData></tableData>
   </div>
 </template>
 
@@ -17,30 +17,5 @@ export default {
       countriesInfo: []
     }
   },
-  mounted() {
-   
-    this.axios.get(this.$store.state.apiUrl + "countries")
-      .then((response) => {
-        if(response.status == 200) {
-          let d = response.data
-          let info = []
-          for (let index = 0; index < d.length; index++) {
-            let country = {
-              "id": d[index].id,
-              "code": d[index].code,
-              "name": d[index].name.ka,
-              "confirmed": d[index].statistic.confirmed,
-              "recovered": d[index].statistic.recovered,
-              "deaths": d[index].statistic.deaths
-            }
-            info.push(country)
-          }
-            this.countriesInfo = info
-        }
-      })
-      .catch(error => {
-          console.log(error);
-      });
-  }
 }
 </script>
