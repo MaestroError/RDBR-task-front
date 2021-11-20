@@ -5,34 +5,36 @@
         <div>
           <img class="mx-auto h-12 w-auto" src="@/assets/logo.png" alt="Workflow" />
           <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to your account
+            <span v-if="signIn">{{$t('sgIn')}}</span>
+            <span v-else>{{$t('crNew')}}</span>
           </h2>
+          <switcher></switcher>
         </div>
         <div class="mt-8">
           <p v-if="errorMsg" class="text-red-400">{{errorMsg}}</p>
           <div v-if="signIn" class="login">
             <div class="rounded-md shadow-sm -space-y-px">
               <div class="relative">
-                <label for="email-address" class="sr-only">Email address</label>
-                <input v-on:keyup.enter="userLogin" id="email-address" v-model="loginInfo.email" name="email" type="email" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Email address" />
+                <label for="email-address" class="sr-only">{{$t('email')}}</label>
+                <input v-on:keyup.enter="userLogin" id="email-address" v-model="loginInfo.email" name="email" type="email" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" :placeholder="$t('email')" />
                 <p v-if="errors.email" class="text-red-400 absolute top-2 right-4">{{errors.email[0]}}</p>
               </div>
               <div class="relative">
-                <label for="password" class="sr-only">Password</label>
-                <input v-on:keyup.enter="userLogin" id="password" v-model="loginInfo.password" name="password" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Password" />
+                <label for="password" class="sr-only">{{$t('password')}}</label>
+                <input v-on:keyup.enter="userLogin" id="password" v-model="loginInfo.password" name="password" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" :placeholder="$t('password')" />
                 <p v-if="errors.password" class="text-red-400 absolute top-2 right-4">{{errors.password[0]}}</p>
               </div>
             </div>
             
             <div class="text-sm text-right mt-2">
               <a href="#" @click="changeAction" class="font-medium pt-2 text-green-600 hover:text-green-500">
-                not yet registered? sign up
+                {{$t('notReg')}}
               </a>
             </div>
 
             <div class="mt-4">
               <button @click="userLogin" type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                Sign in
+                {{$t('signin')}}
               </button>
             </div>
           </div>
@@ -40,36 +42,36 @@
           <div v-if="signUp" class="register">
             <div class="rounded-md shadow-sm -space-y-px">
               <div class="relative">
-                <label for="name" class="sr-only">Name</label>
-                <input v-on:keyup.enter="userRegister" id="name" name="name" v-model="registerInfo.name" type="name" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Name" />
+                <label for="name" class="sr-only">{{$t('name')}}</label>
+                <input v-on:keyup.enter="userRegister" id="name" name="name" v-model="registerInfo.name" type="name" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" :placeholder="$t('name')" />
                 <p v-if="errors.name" class="text-red-400 absolute top-2 right-4">{{errors.name[0]}}</p>
               </div>
               <div class="relative">
-                <label for="email-address" class="sr-only">Email address</label>
-                <input v-on:keyup.enter="userRegister" id="email-address" v-model="registerInfo.email" name="email" type="email" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Email address" />
+                <label for="email-address" class="sr-only">{{$t('email')}}</label>
+                <input v-on:keyup.enter="userRegister" id="email-address" v-model="registerInfo.email" name="email" type="email" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" :placeholder="$t('email')" />
                 <p v-if="errors.email" class="text-red-400 absolute top-2 right-4">{{errors.email[0]}}</p>
               </div>
               <div class="relative">
-                <label for="password" class="sr-only">Password</label>
-                <input v-on:keyup.enter="userRegister" id="password" v-model="registerInfo.password" name="password" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Password" />
+                <label for="password" class="sr-only">{{$t('password')}}</label>
+                <input v-on:keyup.enter="userRegister" id="password" v-model="registerInfo.password" name="password" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" :placeholder="$t('password')" />
                 <p v-if="errors.password" class="text-red-400 absolute top-2 right-4">{{errors.password[0]}}</p>
               </div>
               <div class="relative">
-                <label for="password_confirmation" class="sr-only">Confirm Password</label>
-                <input v-on:keyup.enter="userRegister" id="password_confirmation" v-model="registerInfo.password_confirmation" name="password_confirmation" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Repeat Password" />
+                <label for="password_confirmation" class="sr-only">{{$t('r_password')}}</label>
+                <input v-on:keyup.enter="userRegister" id="password_confirmation" v-model="registerInfo.password_confirmation" name="password_confirmation" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" :placeholder="$t('r_password')" />
                 <p v-if="errors.password_confirmation" class="text-red-400 absolute top-2 right-4">{{errors.password_confirmation[0]}}</p>
               </div>
             </div>
 
             <div class="text-sm text-right mt-2">
               <a href="#" @click="changeAction" class="font-medium text-green-600 hover:text-green-500">
-                Already have account? sign in
+                {{$t('alReg')}}
               </a>
             </div>
 
             <div class="mt-4">
               <button @click="userRegister" type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
-                Sign Up
+                {{$t('signup')}}
               </button>
             </div>
           </div>
@@ -81,11 +83,11 @@
 </template>
 
 <script>
-
+import switcher from "@/components/langSwitcher";
 export default {
   name: 'Home',
   components: {
-    //HelloWorld
+    switcher
   },
   data: function () {
     return {

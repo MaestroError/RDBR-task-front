@@ -17,11 +17,11 @@ The application needs to have two parts:
     * You need to create fresh Vue.js Application +
     * App should have Vuex state managment +
     * You need to create Autorization with the help of Sanctum tokens +
-    * You need to create SpreedSheet Table for all the countries and show all the information with this api
-    * You should be able to sort the results by the deaths, confirmeds and recovereds value - in ascending and descending order
-    * You need to have search input that's gonna search in every field of the data records and filter the results with it.
-    * You need to create Cards for deaths, recoveries and confirmeds summary data
-    * Client Application needs to have localization support: English and Georgian
+    * You need to create SpreedSheet Table for all the countries and show all the information with this api+
+    * You should be able to sort the results by the deaths, confirmeds and recovereds value - in ascending and descending order+
+    * You need to have search input that's gonna search in every field of the data records and filter the results with it.+
+    * You need to create Cards for deaths, recoveries and confirmeds summary data+
+    * Client Application needs to have localization support: English and Georgian+
 
 ## Project setup
 ```

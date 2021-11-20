@@ -1,0 +1,20 @@
+{
+  "message": "hello i18n !!",
+  "signin": "Sign In",
+  "signup": "Sign Up",
+  "name": "Name",
+  "email": "Email address",
+  "password": "Password",
+  "r_password": "Confirm Password",
+  "notReg": "not yet registered? sign up",
+  "alReg": "Already have account? sign in",
+  "crNew": "Create new account",
+  "sgIn": "Sign in to your account",
+  "logout": "Logout",
+  "c-19-stats": "Covid 19 Statistics",
+  "code": "Code",
+  "confirmed": "Confirmed",
+  "recovered": "Recovered",
+  "deaths": "Deaths",
+  "search": "Search"
+}

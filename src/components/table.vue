@@ -2,7 +2,7 @@
   <div class="container mx-auto mt-8">
     <div class="py-2" style="text-align: left">
       <label></label>
-      <input class="w-100 border-b-2 border-green-600" placeholder="Search" v-model="searchTerm" />
+      <input class="w-100 border-b-2 border-green-600" :placeholder="$t('search')" v-model="searchTerm" />
     </div>
     <div class="mt-2">
       <div class="flex flex-col">
@@ -23,7 +23,7 @@
                     </th>
                     <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider relative">
                       <span  @click="changeSort('code', 'next', 'string')" class="cursor-pointer">
-                        Code
+                        {{$t('code')}}
                       </span>
                       <span class="absolute right-2 cursor-pointer " v-if="sortField == 'code'">
                         <img @click="changeSort('code', 'asc', 'string')" v-if="sortOrder == 'desc'" src="@/assets/up.png" alt="" class="arrow">
@@ -32,7 +32,7 @@
                     </th>
                     <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider relative">
                       <span  @click="changeSort('name', 'next', 'string')" class="cursor-pointer">
-                        Name
+                        {{$t('name')}}
                       </span>
                       <span class="absolute right-2 cursor-pointer " v-if="sortField == 'name'">
                         <img @click="changeSort('name', 'asc', 'string')" v-if="sortOrder == 'desc'" src="@/assets/up.png" alt="" class="arrow">
@@ -41,7 +41,7 @@
                     </th>
                     <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider relative">
                       <span  @click="changeSort('confirmed', 'next', 'int')" class="cursor-pointer">
-                        Confirmed
+                        {{$t('confirmed')}}
                       </span>
                       <span class="absolute right-2 cursor-pointer " v-if="sortField == 'confirmed'">
                         <img @click="changeSort('confirmed', 'asc', 'int')" v-if="sortOrder == 'desc'" src="@/assets/up.png" alt="" class="arrow">
@@ -50,7 +50,7 @@
                     </th>
                     <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider relative">
                       <span  @click="changeSort('recovered', 'next', 'int')" class="cursor-pointer">
-                        Recovered
+                        {{$t('recovered')}}
                       </span>
                       <span class="absolute right-2 cursor-pointer " v-if="sortField == 'recovered'">
                         <img @click="changeSort('recovered', 'asc', 'int')" v-if="sortOrder == 'desc'" src="@/assets/up.png" alt="" class="arrow">
@@ -59,7 +59,7 @@
                     </th>
                     <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider relative">
                       <span  @click="changeSort('deaths', 'next', 'int')" class="cursor-pointer">
-                        Deaths
+                        {{$t('deaths')}}
                       </span>
                       <span class="absolute right-2 cursor-pointer " v-if="sortField == 'deaths'">
                         <img @click="changeSort('deaths', 'asc', 'int')" v-if="sortOrder == 'desc'" src="@/assets/up.png" alt="" class="arrow">
@@ -126,7 +126,8 @@ export default {
         this.sortOrder = order
       }
       this.sortType = type
-    }
+    },
+    
   },
   computed: {
     dataProccessed() {
@@ -184,10 +185,14 @@ export default {
             let country = {
               "id": d[index].id.toString(),
               "code": d[index].code,
-              "name": d[index].name.en,
               "confirmed": d[index].statistic.confirmed.toString(),
               "recovered": d[index].statistic.recovered.toString(),
               "deaths": d[index].statistic.deaths.toString()
+            }
+            if(this.$i18n.locale == "en") {
+              country.name = d[index].name.en
+            } else {
+              country.name = d[index].name.ka
             }
             info.push(country)
           }

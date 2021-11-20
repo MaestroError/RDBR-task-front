@@ -1,17 +1,20 @@
 <template>
   <div class="about">
-    <h2 class="mt-4">Covid 19 Statistics</h2>
-    <small @click="logout" class="text-green-600 cursor-pointer">Logout</small>
+    <switcher></switcher>
+    <h2 class="mt-4">{{$t('c-19-stats')}}</h2>
+    <small @click="logout" class="text-green-600 cursor-pointer">{{$t('logout')}}</small>
     <tableData></tableData>
   </div>
 </template>
 
 <script>
 import tableData from '@/components/table'
+import switcher from "@/components/langSwitcher";
 export default {
   name: 'Stat',
   components: {
-    tableData
+    tableData,
+    switcher
   },
   methods: {
     logout() {
