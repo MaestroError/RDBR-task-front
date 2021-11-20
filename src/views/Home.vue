@@ -14,12 +14,12 @@
             <div class="rounded-md shadow-sm -space-y-px">
               <div class="relative">
                 <label for="email-address" class="sr-only">Email address</label>
-                <input id="email-address" v-model="loginInfo.email" name="email" type="email" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Email address" />
+                <input v-on:keyup.enter="userLogin" id="email-address" v-model="loginInfo.email" name="email" type="email" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Email address" />
                 <p v-if="errors.email" class="text-red-400 absolute top-2 right-4">{{errors.email[0]}}</p>
               </div>
               <div class="relative">
                 <label for="password" class="sr-only">Password</label>
-                <input id="password" v-model="loginInfo.password" name="password" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Password" />
+                <input v-on:keyup.enter="userLogin" id="password" v-model="loginInfo.password" name="password" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Password" />
                 <p v-if="errors.password" class="text-red-400 absolute top-2 right-4">{{errors.password[0]}}</p>
               </div>
             </div>
@@ -41,22 +41,22 @@
             <div class="rounded-md shadow-sm -space-y-px">
               <div class="relative">
                 <label for="name" class="sr-only">Name</label>
-                <input id="name" name="name" v-model="registerInfo.name" type="name" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Name" />
+                <input v-on:keyup.enter="userRegister" id="name" name="name" v-model="registerInfo.name" type="name" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Name" />
                 <p v-if="errors.name" class="text-red-400 absolute top-2 right-4">{{errors.name[0]}}</p>
               </div>
               <div class="relative">
                 <label for="email-address" class="sr-only">Email address</label>
-                <input id="email-address" v-model="registerInfo.email" name="email" type="email" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Email address" />
+                <input v-on:keyup.enter="userRegister" id="email-address" v-model="registerInfo.email" name="email" type="email" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Email address" />
                 <p v-if="errors.email" class="text-red-400 absolute top-2 right-4">{{errors.email[0]}}</p>
               </div>
               <div class="relative">
                 <label for="password" class="sr-only">Password</label>
-                <input id="password" v-model="registerInfo.password" name="password" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Password" />
+                <input v-on:keyup.enter="userRegister" id="password" v-model="registerInfo.password" name="password" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Password" />
                 <p v-if="errors.password" class="text-red-400 absolute top-2 right-4">{{errors.password[0]}}</p>
               </div>
               <div class="relative">
                 <label for="password_confirmation" class="sr-only">Confirm Password</label>
-                <input id="password_confirmation" v-model="registerInfo.password_confirmation" name="password_confirmation" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Repeat Password" />
+                <input v-on:keyup.enter="userRegister" id="password_confirmation" v-model="registerInfo.password_confirmation" name="password_confirmation" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm" placeholder="Repeat Password" />
                 <p v-if="errors.password_confirmation" class="text-red-400 absolute top-2 right-4">{{errors.password_confirmation[0]}}</p>
               </div>
             </div>

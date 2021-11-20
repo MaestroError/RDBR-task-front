@@ -2,7 +2,7 @@
   <div class="container mx-auto mt-8">
     <div class="py-2" style="text-align: left">
       <label></label>
-      <input class="w-100 border-b-2 border-green-600" @input="search" placeholder="Search" v-model="searchTerm" />
+      <input class="w-100 border-b-2 border-green-600" placeholder="Search" v-model="searchTerm" />
     </div>
     <div class="mt-2">
       <div class="flex flex-col">
@@ -12,28 +12,64 @@
               <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                   <tr>
-                    <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      ID
+                    <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider relative">
+                      <span  @click="changeSort('id', 'next', 'int')" class="cursor-pointer">
+                        ID
+                      </span>
+                      <span class="absolute right-2 cursor-pointer " v-if="sortField == 'id'">
+                        <img @click="changeSort('id', 'asc', 'int')" v-if="sortOrder == 'desc'" src="@/assets/up.png" alt="" class="arrow">
+                        <img @click="changeSort('id', 'desc', 'int')" v-if="sortOrder == 'asc'" src="@/assets/down.png" alt="" class="arrow">
+                      </span>
                     </th>
-                    <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Code
+                    <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider relative">
+                      <span  @click="changeSort('code', 'next', 'string')" class="cursor-pointer">
+                        Code
+                      </span>
+                      <span class="absolute right-2 cursor-pointer " v-if="sortField == 'code'">
+                        <img @click="changeSort('code', 'asc', 'string')" v-if="sortOrder == 'desc'" src="@/assets/up.png" alt="" class="arrow">
+                        <img @click="changeSort('code', 'desc', 'string')" v-if="sortOrder == 'asc'" src="@/assets/down.png" alt="" class="arrow">
+                      </span>
                     </th>
-                    <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Name
+                    <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider relative">
+                      <span  @click="changeSort('name', 'next', 'string')" class="cursor-pointer">
+                        Name
+                      </span>
+                      <span class="absolute right-2 cursor-pointer " v-if="sortField == 'name'">
+                        <img @click="changeSort('name', 'asc', 'string')" v-if="sortOrder == 'desc'" src="@/assets/up.png" alt="" class="arrow">
+                        <img @click="changeSort('name', 'desc', 'string')" v-if="sortOrder == 'asc'" src="@/assets/down.png" alt="" class="arrow">
+                      </span>
                     </th>
-                    <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Confirmed
+                    <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider relative">
+                      <span  @click="changeSort('confirmed', 'next', 'int')" class="cursor-pointer">
+                        Confirmed
+                      </span>
+                      <span class="absolute right-2 cursor-pointer " v-if="sortField == 'confirmed'">
+                        <img @click="changeSort('confirmed', 'asc', 'int')" v-if="sortOrder == 'desc'" src="@/assets/up.png" alt="" class="arrow">
+                        <img @click="changeSort('confirmed', 'desc', 'int')" v-if="sortOrder == 'asc'" src="@/assets/down.png" alt="" class="arrow">
+                      </span>
                     </th>
-                    <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Recovered
+                    <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider relative">
+                      <span  @click="changeSort('recovered', 'next', 'int')" class="cursor-pointer">
+                        Recovered
+                      </span>
+                      <span class="absolute right-2 cursor-pointer " v-if="sortField == 'recovered'">
+                        <img @click="changeSort('recovered', 'asc', 'int')" v-if="sortOrder == 'desc'" src="@/assets/up.png" alt="" class="arrow">
+                        <img @click="changeSort('recovered', 'desc', 'int')" v-if="sortOrder == 'asc'" src="@/assets/down.png" alt="" class="arrow">
+                      </span>
                     </th>
-                    <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Deaths
+                    <th scope="col" class="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider relative">
+                      <span  @click="changeSort('deaths', 'next', 'int')" class="cursor-pointer">
+                        Deaths
+                      </span>
+                      <span class="absolute right-2 cursor-pointer " v-if="sortField == 'deaths'">
+                        <img @click="changeSort('deaths', 'asc', 'int')" v-if="sortOrder == 'desc'" src="@/assets/up.png" alt="" class="arrow">
+                        <img @click="changeSort('deaths', 'desc', 'int')" v-if="sortOrder == 'asc'" src="@/assets/down.png" alt="" class="arrow">
+                      </span>
                     </th>
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                  <tr v-for="country in data" :key="country.id">
+                  <tr v-for="country in dataProccessed" :key="country.id">
                     <td class="px-6 py-4 whitespace-nowrap">
                       <div class="text-sm text-gray-900">{{ country.id }}</div>
                     </td>
@@ -64,27 +100,79 @@
   
 </template>
 
+<style scoped>
+  .arrow {
+    max-width:15px;
+  }
+</style>
+
 <script>
 export default {
   data: function () {
     return {
       searchTerm: "",
-      data: []
+      data: [],
+      sortField: "id",
+      sortOrder: "asc",
+      sortType: "int"
     }
   },
   methods: {
-    search() {
-      this.data = this.data.filter((x) => {
-        x.id.toLowerCase().includes(this.searchTerm.value.toLowerCase()) ||
-        x.code.toLowerCase().includes(this.searchTerm.value.toLowerCase()) ||
-        x.name.toLowerCase().includes(this.searchTerm.value.toLowerCase()) ||
-        x.confirmed.toLowerCase().includes(this.searchTerm.value.toLowerCase()) ||
-        x.recovered.toLowerCase().includes(this.searchTerm.value.toLowerCase()) ||
-        x.deaths.toLowerCase().includes(this.searchTerm.value.toLowerCase())
-    })
+    changeSort(field, order, type) {
+      this.sortField = field
+      if(order == "next") {
+        this.sortOrder = this.sortOrder == "asc" ? "desc" : "asc"
+      } else {
+        this.sortOrder = order
+      }
+      this.sortType = type
     }
   },
-  
+  computed: {
+    dataProccessed() {
+      return this.data.filter((x) => {
+          return x.id.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          x.code.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          x.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          x.confirmed.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          x.recovered.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          x.deaths.toLowerCase().includes(this.searchTerm.toLowerCase())
+      }).sort((a, b) => {
+        // Check data type
+        if(this.sortType == "int") {
+          // check order
+          if(this.sortOrder == "desc") {
+            return parseInt(a[this.sortField]) + parseInt(b[this.sortField]);
+          } else {
+            return parseInt(a[this.sortField]) - parseInt(b[this.sortField]);
+          }
+        }
+
+        if(this.sortType == "string") {
+          let fa = a[this.sortField].toLowerCase(),
+          fb = b[this.sortField].toLowerCase();
+          // check order
+          if(this.sortOrder == "desc") {
+            if (fa < fb) {
+                return -1;
+            }
+            if (fa > fb) {
+                return 1;
+            }
+          } else {
+            if (fb < fa) {
+                return -1;
+            }
+            if (fb > fa) {
+                return 1;
+            }
+          }
+          return 0;
+        }
+        
+    });
+    }
+  },
   mounted() {
    
     this.axios.get(this.$store.state.apiUrl + "countries")
@@ -96,7 +184,7 @@ export default {
             let country = {
               "id": d[index].id.toString(),
               "code": d[index].code,
-              "name": d[index].name.ka,
+              "name": d[index].name.en,
               "confirmed": d[index].statistic.confirmed.toString(),
               "recovered": d[index].statistic.recovered.toString(),
               "deaths": d[index].statistic.deaths.toString()
